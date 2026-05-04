@@ -46,10 +46,10 @@ export default function Navbar() {
           <div className="absolute right-10 top-0 h-16 w-96 bg-sky-200/24 blur-2xl" />
         </div>
       )}
-      <div className="container flex items-center justify-between h-16 lg:h-20">
+      <div className="container flex h-14 items-center justify-between lg:h-20">
         <Link href="/" className="flex items-center group">
-          <div className="flex items-center gap-2.5">
-            <div className="h-10 w-10 overflow-hidden rounded-md border border-white/70 bg-white/15 shadow-sm backdrop-blur-sm sm:h-11 sm:w-11">
+          <div className="flex items-center gap-2 sm:gap-2.5">
+            <div className="h-8 w-8 overflow-hidden rounded-md border border-white/70 bg-white/15 shadow-sm backdrop-blur-sm sm:h-11 sm:w-11">
               <img
                 src={brandLogoSrc}
                 alt="RushLB - Chase The Rush"
@@ -57,10 +57,10 @@ export default function Navbar() {
               />
             </div>
             <div className="leading-none">
-              <div className={cn("font-display text-[1.25rem] tracking-[0.08em]", isHome ? "text-sky-800" : "text-sky-700")}>
+              <div className={cn("font-display text-[1.03rem] tracking-[0.06em] sm:text-[1.25rem] sm:tracking-[0.08em]", isHome ? "text-sky-800" : "text-sky-700")}>
                 RushLB
               </div>
-              <div className={cn("text-[10px] uppercase tracking-[0.22em] font-semibold mt-1", isHome ? "text-slate-700/85" : "text-muted-foreground")}>
+              <div className={cn("mt-0.5 text-[9px] font-semibold uppercase tracking-[0.16em] sm:mt-1 sm:text-[10px] sm:tracking-[0.22em]", isHome ? "text-slate-700/85" : "text-muted-foreground")}>
                 Chase The Rush
               </div>
             </div>
@@ -83,11 +83,11 @@ export default function Navbar() {
           ))}
         </nav>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5 sm:gap-2">
           <button
             onClick={() => navigate("/wishlist")}
             className={cn(
-              "relative h-10 w-10 rounded-full backdrop-blur-xl flex items-center justify-center hover:scale-105 transition",
+              "relative flex h-9 w-9 items-center justify-center rounded-full backdrop-blur-xl transition hover:scale-105 sm:h-10 sm:w-10",
               isHome ? "border border-white/70 bg-white/44 text-sky-950 hover:border-orange-300/70 hover:text-orange-700" : "glass"
             )}
             aria-label="Wishlist"
@@ -101,7 +101,7 @@ export default function Navbar() {
           </button>
           <button
             className={cn(
-              "lg:hidden h-10 w-10 rounded-full backdrop-blur-xl flex items-center justify-center",
+              "flex h-9 w-9 items-center justify-center rounded-full backdrop-blur-xl lg:hidden sm:h-10 sm:w-10",
               isHome ? "border border-white/70 bg-white/44 text-sky-950" : "glass"
             )}
             onClick={() => setOpen((o) => !o)}
@@ -123,14 +123,14 @@ export default function Navbar() {
               isHome ? "border-white/60 bg-white/92 text-slate-950" : "glass border-sky-200/80"
             )}
           >
-            <div className="container py-4 flex flex-col gap-1">
+            <div className="container flex flex-col gap-1 py-3.5">
               {links.map((l) => (
                 <Link
                   key={l.href}
                   href={l.href}
                   onClick={() => setOpen(false)}
                   className={cn(
-                    "px-3 py-3 rounded-lg text-base font-medium",
+                    "rounded-lg px-3 py-2.5 text-[0.98rem] font-medium",
                     isHome ? "text-slate-800 hover:bg-sky-50/80 hover:text-sky-900" : "hover:bg-cyan-50/80"
                   )}
                 >

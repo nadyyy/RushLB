@@ -100,7 +100,7 @@ export default function Home() {
             <div className="absolute inset-0 home-hero-video-overlay-glow" />
           </div>
 
-          <div className="container relative z-10 grid gap-8 pt-24 pb-0 lg:min-h-screen lg:grid-cols-12 lg:items-center lg:pt-28 lg:pb-10">
+          <div className="container relative z-10 grid gap-6 pt-20 pb-0 sm:pt-24 sm:gap-7 lg:min-h-screen lg:grid-cols-12 lg:items-center lg:pt-28 lg:pb-10">
             <div className="lg:col-span-12">
               
 
@@ -108,7 +108,7 @@ export default function Home() {
                 initial={{ opacity: 0, y: 22 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.58, delay: 0.08 }}
-                className="home-hero-title"
+                className="home-hero-title max-w-[15ch] text-[2.1rem] leading-[1.04] tracking-[-0.01em] sm:max-w-[18ch] sm:text-[2.7rem]"
               >
                 Discover Your Next Rush Across Lebanon
               </motion.h1>
@@ -117,7 +117,7 @@ export default function Home() {
                 initial={{ opacity: 0, y: 18 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.18 }}
-                className="mt-5 max-w-2xl text-base leading-7 text-slate-700 sm:text-lg"
+                className="mt-3 max-w-[32ch] text-[0.95rem] leading-6 text-slate-700 sm:mt-4 sm:max-w-2xl sm:text-lg sm:leading-7"
               >
                 From the waves to the mountains, discover Lebanon’s most adrenaline-filled experiences.
 Ride. Fly. Dive. Explore. All in one place.
@@ -127,9 +127,9 @@ Ride. Fly. Dive. Explore. All in one place.
                 initial={{ opacity: 0, y: 14 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.48, delay: 0.24 }}
-                className="mt-6 flex flex-wrap gap-3"
+                className="home-hero-actions mt-5 flex flex-wrap gap-2.5 sm:mt-6 sm:gap-3"
               >
-                <Link href="/activities" className="home-browse-button home-browse-button-primary">
+                <Link href="/activities" className="home-browse-button home-browse-button-primary home-hero-cta">
                   Browse activities
                   <ArrowRight className="h-5 w-5" />
                 </Link>
@@ -140,18 +140,18 @@ Ride. Fly. Dive. Explore. All in one place.
                 initial={{ opacity: 0, y: 18 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.52, delay: 0.32 }}
-                className="home-discovery-search mt-5"
+                className="home-discovery-search home-hero-search mt-4 sm:mt-5"
               >
-                <div className="flex min-w-0 flex-1 items-center gap-3 px-4">
-                  <Search className="h-5 w-5 shrink-0 text-sky-700" />
+                <div className="home-hero-search-field flex min-w-0 flex-1 items-center gap-2.5 px-3.5 sm:gap-3 sm:px-4">
+                  <Search className="h-4 w-4 shrink-0 text-sky-700 sm:h-5 sm:w-5" />
                   <input
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
                     placeholder="Search by activity, city, mood, or budget"
-                    className="min-w-0 flex-1 bg-transparent py-4 text-sm text-slate-900 outline-none placeholder:text-slate-500 sm:text-base"
+                    className="home-hero-search-input min-w-0 flex-1 bg-transparent py-3 text-[0.92rem] text-slate-900 outline-none placeholder:text-slate-500 sm:py-4 sm:text-base"
                   />
                 </div>
-                <button className="home-search-button">
+                <button className="home-search-button home-hero-search-button">
                   Search
                   <ArrowRight className="h-4 w-4" />
                 </button>
@@ -161,11 +161,11 @@ Ride. Fly. Dive. Explore. All in one place.
           </div>
         </section>
 
-        <section className="container py-12">
-          <div className="mb-6 flex items-end justify-between">
+        <section className="container py-10 sm:py-12">
+          <div className="mb-4 flex items-end justify-between sm:mb-6">
             <div>
               <div className="home-section-kicker">Pick your rush</div>
-              <h2 className="font-display text-3xl tracking-wide text-slate-950 sm:text-4xl">Categories</h2>
+              <h2 className="font-display text-[1.85rem] leading-[1.07] tracking-wide text-slate-950 sm:text-4xl">Categories</h2>
             </div>
             <Link
               href="/categories"
@@ -174,7 +174,7 @@ Ride. Fly. Dive. Explore. All in one place.
               All categories <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
+          <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 sm:gap-3 lg:grid-cols-5">
             {categories.map((c, i) => (
               <motion.div
                 key={c.name}
@@ -188,19 +188,19 @@ Ride. Fly. Dive. Explore. All in one place.
                   return (
                 <Link
                   href={`/activities?category=${encodeURIComponent(c.name)}`}
-                  className="home-feature-card group"
+                  className="home-feature-card group min-h-[140px] rounded-2xl p-3.5 sm:min-h-[165px] sm:rounded-3xl sm:p-4"
                   style={{
                     "--feature-card-image": `url(${c.image})`,
                     "--feature-card-position": c.position ?? "center",
                   } as CSSProperties}
                 >
                   <div className="relative z-10 flex h-full flex-col justify-between">
-                    <Icon className="h-5 w-5 text-white" strokeWidth={2.4} />
+                    <Icon className="h-4 w-4 text-white sm:h-5 sm:w-5" strokeWidth={2.4} />
                     <div>
-                      <div className="text-[11px] font-semibold uppercase tracking-[0.16em] text-white/78">
+                      <div className="text-[10px] font-semibold uppercase tracking-[0.14em] text-white/78 sm:text-[11px] sm:tracking-[0.16em]">
                         {categoryCounts[c.name] ?? 0} {categoryCounts[c.name] === 1 ? "activity" : "activities"}
                       </div>
-                      <div className="mt-1 font-display text-xl leading-none text-white">{c.name}</div>
+                      <div className="mt-1 font-display text-[1.1rem] leading-none text-white sm:text-xl">{c.name}</div>
                     </div>
                   </div>
                 </Link>
