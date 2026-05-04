@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { Link, useLocation } from "wouter";
 import { motion } from "framer-motion";
 import type { CSSProperties } from "react";
@@ -51,6 +51,7 @@ const categoryIcons = {
 
 export default function Home() {
   const heroVideoSrc = "/videos/hero-bg.mp4";
+  const heroVideoRef = useRef<HTMLVideoElement>(null);
   const [, navigate] = useLocation();
   const [query, setQuery] = useState("");
   const { recentlyViewed, appReviews, addAppReview } = useApp();
@@ -75,11 +76,21 @@ export default function Home() {
         <section className="home-hero-summer relative overflow-hidden">
           <div className="absolute inset-0 z-0">
             <video
+              ref={heroVideoRef}
               autoPlay
               muted
               loop
               playsInline
               preload="metadata"
+              onTimeUpdate={() => {
+                const video = heroVideoRef.current;
+                if (!video || !Number.isFinite(video.duration) || video.duration <= 0) return;
+                // Skip possible dark frames at the very end for a seamless loop.
+                if (video.duration - video.currentTime < 0.12) {
+                  video.currentTime = 0.03;
+                  void video.play();
+                }
+              }}
               className="absolute inset-0 h-full w-full object-cover home-hero-video-media"
               aria-hidden="true"
             >
