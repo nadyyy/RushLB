@@ -85,7 +85,15 @@ export default function ActivitiesPage() {
               </div>
               <button
                 onClick={() => setFilterPanelOpen((open) => !open)}
-                className="home-search-button h-auto min-h-14 justify-center px-5"
+                className="filters-solid-button inline-flex min-h-14 h-auto items-center justify-center gap-2 rounded-full px-5 text-sm font-extrabold text-white transition"
+                style={{
+                  background: "#0f5f79",
+                  backgroundImage: "none",
+                  boxShadow: "none",
+                  filter: "none",
+                  backdropFilter: "none",
+                  WebkitBackdropFilter: "none",
+                }}
                 aria-expanded={filterPanelOpen}
                 aria-controls="activities-filter-panel"
               >
@@ -211,7 +219,10 @@ export default function ActivitiesPage() {
                   <Filters state={state} onChange={setState} />
                 </div>
                 <div className="border-t border-white/80 bg-white/78 p-5 backdrop-blur-xl">
-                  <button onClick={() => setFilterPanelOpen(false)} className="home-search-button h-12 w-full justify-center">
+                  <button
+                    onClick={() => setFilterPanelOpen(false)}
+                    className="filters-solid-button inline-flex h-12 w-full items-center justify-center rounded-full px-5 text-sm font-extrabold text-white transition"
+                  >
                     Show {results.length} results
                   </button>
                 </div>
