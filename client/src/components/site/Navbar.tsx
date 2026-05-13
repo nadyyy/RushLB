@@ -36,16 +36,14 @@ export default function Navbar() {
             ? "border-white/70 bg-white/78 shadow-[0_18px_70px_-48px_rgba(15,76,92,0.55)] backdrop-blur-2xl"
             : "border-white/40 bg-white/26 backdrop-blur-xl"
           : scrolled
-            ? "glass border-b border-sky-200/80"
-            : "bg-transparent border-transparent"
+            ? "border-white/72 bg-white/84 shadow-[0_18px_70px_-48px_rgba(15,76,92,0.48)] backdrop-blur-2xl"
+            : "border-white/45 bg-white/42 backdrop-blur-xl"
       }`}
     >
-      {isHome && (
-        <div className="pointer-events-none absolute inset-0 overflow-hidden">
-          <div className="absolute -left-24 top-0 h-16 w-80 bg-orange-200/25 blur-2xl" />
-          <div className="absolute right-10 top-0 h-16 w-96 bg-sky-200/24 blur-2xl" />
-        </div>
-      )}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="absolute -left-24 top-0 h-16 w-80 bg-orange-200/25 blur-2xl" />
+        <div className="absolute right-10 top-0 h-16 w-96 bg-sky-200/24 blur-2xl" />
+      </div>
       <div className="container flex h-14 items-center justify-between lg:h-20">
         <Link href="/" className="flex items-center group">
           <div className="flex items-center gap-2 sm:gap-2.5">
@@ -57,10 +55,10 @@ export default function Navbar() {
               />
             </div>
             <div className="leading-none">
-              <div className={cn("font-display text-[1.03rem] tracking-[0.06em] sm:text-[1.25rem] sm:tracking-[0.08em]", isHome ? "text-sky-800" : "text-sky-700")}>
+              <div className="font-display text-[1.03rem] tracking-[0.06em] text-sky-800 sm:text-[1.25rem] sm:tracking-[0.08em]">
                 RushLB
               </div>
-              <div className={cn("mt-0.5 text-[9px] font-semibold uppercase tracking-[0.16em] sm:mt-1 sm:text-[10px] sm:tracking-[0.22em]", isHome ? "text-slate-700/85" : "text-muted-foreground")}>
+              <div className="mt-0.5 text-[9px] font-semibold uppercase tracking-[0.16em] text-slate-700/85 sm:mt-1 sm:text-[10px] sm:tracking-[0.22em]">
                 Chase The Rush
               </div>
             </div>
@@ -74,7 +72,7 @@ export default function Navbar() {
               href={l.href}
               className={cn(
                 "px-3 py-2 text-sm font-semibold transition-colors relative group",
-                isHome ? "text-slate-800/82 hover:text-sky-900" : "text-foreground/80 hover:text-foreground"
+                "text-slate-800/82 hover:text-sky-900"
               )}
             >
               {l.label}
@@ -88,7 +86,7 @@ export default function Navbar() {
             onClick={() => navigate("/wishlist")}
             className={cn(
               "relative flex h-9 w-9 items-center justify-center rounded-full backdrop-blur-xl transition hover:scale-105 sm:h-10 sm:w-10",
-              isHome ? "border border-white/70 bg-white/44 text-sky-950 hover:border-orange-300/70 hover:text-orange-700" : "glass"
+              "border border-white/70 bg-white/44 text-sky-950 hover:border-orange-300/70 hover:text-orange-700"
             )}
             aria-label="Wishlist"
           >
@@ -102,7 +100,7 @@ export default function Navbar() {
           <button
             className={cn(
               "flex h-9 w-9 items-center justify-center rounded-full backdrop-blur-xl lg:hidden sm:h-10 sm:w-10",
-              isHome ? "border border-white/70 bg-white/44 text-sky-950" : "glass"
+              "border border-white/70 bg-white/44 text-sky-950"
             )}
             onClick={() => setOpen((o) => !o)}
             aria-label="Toggle menu"
@@ -120,7 +118,7 @@ export default function Navbar() {
             exit={{ opacity: 0, y: -10 }}
             className={cn(
               "lg:hidden border-t backdrop-blur-2xl",
-              isHome ? "border-white/60 bg-white/92 text-slate-950" : "glass border-sky-200/80"
+              "border-white/60 bg-white/92 text-slate-950"
             )}
           >
             <div className="container flex flex-col gap-1 py-3.5">
@@ -131,7 +129,7 @@ export default function Navbar() {
                   onClick={() => setOpen(false)}
                   className={cn(
                     "rounded-lg px-3 py-2.5 text-[0.98rem] font-medium",
-                    isHome ? "text-slate-800 hover:bg-sky-50/80 hover:text-sky-900" : "hover:bg-cyan-50/80"
+                    "text-slate-800 hover:bg-sky-50/80 hover:text-sky-900"
                   )}
                 >
                   {l.label}

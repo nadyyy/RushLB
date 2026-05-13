@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { useLocation } from "wouter";
-import { Search, SlidersHorizontal, LayoutGrid, List, MapPin, X } from "lucide-react";
+import { Search, SlidersHorizontal, LayoutGrid, List, X } from "lucide-react";
 import Layout from "@/components/site/Layout";
 import ActivityCard from "@/components/site/ActivityCard";
 import Filters, { FilterState, applyFilters, defaultFilters } from "@/components/site/Filters";
@@ -52,8 +52,8 @@ export default function ActivitiesPage() {
   return (
     <Layout>
       <div className="activities-page">
-        <section className="activities-hero border-b border-white/70">
-          <div className="container py-10 lg:py-14">
+        <section className="activities-hero relative overflow-hidden">
+          <div className="container activities-hero-content py-10 lg:py-14">
             <div className="home-section-kicker mb-2">All adventures</div>
             <h1 className="font-display text-4xl tracking-wide text-slate-950 sm:text-5xl lg:text-6xl">
               EXPLORE LEBANON
@@ -93,9 +93,11 @@ export default function ActivitiesPage() {
               </button>
             </div>
           </div>
+          <div className="activities-hero-bottom-fade" aria-hidden="true" />
         </section>
 
-        <section className="container py-10">
+        <section className="activities-results-section container">
+          <div className="activities-results-shell">
           <div className="mb-5 flex items-center justify-between">
             <div className="text-sm text-slate-600">
               <span className="font-display text-2xl rush-text mr-2">{results.length}</span>
@@ -122,22 +124,6 @@ export default function ActivitiesPage() {
               >
                 <List className="h-4 w-4" />
               </button>
-            </div>
-          </div>
-
-          <div className="home-panel relative mb-6 h-32 overflow-hidden">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_28%_30%,rgba(249,115,22,0.16),transparent_55%),radial-gradient(circle_at_84%_62%,rgba(14,116,144,0.2),transparent_58%)]" />
-            <div className="absolute inset-0 grid grid-cols-12 grid-rows-3 opacity-20">
-              {Array.from({ length: 36 }).map((_, i) => (
-                <div key={i} className="border border-sky-700/10" />
-              ))}
-            </div>
-            <div className="relative flex h-full items-center justify-between px-6">
-              <div>
-                <div className="home-section-kicker">Map view</div>
-                <div className="font-display text-xl text-slate-950">Coming soon - interactive map</div>
-              </div>
-              <MapPin className="h-10 w-10 rush-text" />
             </div>
           </div>
 
@@ -184,6 +170,7 @@ export default function ActivitiesPage() {
               ))}
             </div>
           )}
+          </div>
         </section>
 
         <AnimatePresence>

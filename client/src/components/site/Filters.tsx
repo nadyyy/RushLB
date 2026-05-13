@@ -1,6 +1,6 @@
-import { categories, cities, Difficulty } from "@/data/activities";
 import { X } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { categories, cities, hiddenGemCities, type Difficulty } from "@/data/activities";
 
 export type FilterState = {
   query: string;
@@ -201,7 +201,11 @@ export function applyFilters<T extends {
   minPeople: number; maxPeople: number;
 }>(items: T[], state: FilterState): T[] {
   let out = items.filter((a) => {
-    if (state.category !== "All" && a.category !== state.category) return false;
+    if (state.category === "Hidden Gems") {
+      if (!hiddenGemCities.includes(a.city)) return false;
+    } else if (state.category !== "All" && a.category !== state.category) {
+      return false;
+    }
     if (state.city !== "All" && a.city !== state.city) return false;
     if (state.difficulty !== "All" && a.difficulty !== state.difficulty) return false;
     if (a.price > state.maxPrice && state.maxPrice < 200) return false;

@@ -20,7 +20,7 @@ import {
 } from "lucide-react";
 import Layout from "@/components/site/Layout";
 import SectionRow from "@/components/site/SectionRow";
-import { activities, categories, cities, appReviews as defaultAppReviews } from "@/data/activities";
+import { activities, categories, cities, hiddenGemCities, appReviews as defaultAppReviews } from "@/data/activities";
 import { useApp } from "@/contexts/AppContext";
 import { toast } from "sonner";
 
@@ -30,7 +30,9 @@ const cityCounts = cities.reduce((acc, c) => {
 }, {} as Record<string, number>);
 
 const categoryCounts = categories.reduce((acc, c) => {
-  acc[c.name] = activities.filter((a) => a.category === c.name).length;
+  acc[c.name] = c.name === "Hidden Gems"
+    ? activities.filter((a) => hiddenGemCities.includes(a.city)).length
+    : activities.filter((a) => a.category === c.name).length;
   return acc;
 }, {} as Record<string, number>);
 
@@ -98,6 +100,7 @@ export default function Home() {
             </video>
             <div className="absolute inset-0 home-hero-video-overlay-primary" />
             <div className="absolute inset-0 home-hero-video-overlay-glow" />
+            <div className="absolute inset-x-0 bottom-0 home-hero-bottom-fade" />
           </div>
 
           <div className="container relative z-10 grid gap-6 pt-20 pb-0 sm:pt-24 sm:gap-7 lg:min-h-screen lg:grid-cols-12 lg:items-center lg:pt-28 lg:pb-10">
@@ -133,6 +136,10 @@ Ride. Fly. Dive. Explore. All in one place.
                   Browse activities
                   <ArrowRight className="h-5 w-5" />
                 </Link>
+                <Link href="/map" className="home-browse-button home-browse-button-primary home-hero-cta">
+                  Open map
+                  <ArrowRight className="h-5 w-5" />
+                </Link>
               </motion.div>
 
               <motion.form
@@ -161,105 +168,63 @@ Ride. Fly. Dive. Explore. All in one place.
           </div>
         </section>
 
-        <section className="container py-10 sm:py-12">
-          <div className="mb-4 flex items-end justify-between sm:mb-6">
-            <div>
-              <div className="home-section-kicker">Pick your rush</div>
-              <h2 className="font-display text-[1.85rem] leading-[1.07] tracking-wide text-slate-950 sm:text-4xl">Categories</h2>
-            </div>
-            <Link
-              href="/categories"
-              className="hidden items-center gap-1.5 text-sm font-bold text-sky-800 hover:text-orange-600 sm:flex"
-            >
-              All categories <ArrowRight className="h-4 w-4" />
-            </Link>
-          </div>
-          <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 sm:gap-3 lg:grid-cols-5">
-            {categories.map((c, i) => (
-              <motion.div
-                key={c.name}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.04 }}
+        <section className="home-feature-intro-section container">
+          <div className="home-feature-intro-shell">
+            <div className="mb-4 flex items-end justify-between sm:mb-6">
+              <div>
+                <div className="home-section-kicker">Pick your rush</div>
+                <h2 className="font-display text-[1.85rem] leading-[1.07] tracking-wide text-slate-950 sm:text-4xl">Categories</h2>
+              </div>
+              <Link
+                href="/categories"
+                className="hidden items-center gap-1.5 text-sm font-bold text-sky-800 hover:text-orange-600 sm:flex"
               >
-                {(() => {
-                  const Icon = categoryIcons[c.icon as keyof typeof categoryIcons] ?? Mountain;
-                  return (
-                <Link
-                  href={`/activities?category=${encodeURIComponent(c.name)}`}
-                  className="home-feature-card group min-h-[140px] rounded-2xl p-3.5 sm:min-h-[165px] sm:rounded-3xl sm:p-4"
-                  style={{
-                    "--feature-card-image": `url(${c.image})`,
-                    "--feature-card-position": c.position ?? "center",
-                  } as CSSProperties}
-                >
-                  <div className="relative z-10 flex h-full flex-col justify-between">
-                    <Icon className="h-4 w-4 text-white sm:h-5 sm:w-5" strokeWidth={2.4} />
-                    <div>
-                      <div className="text-[10px] font-semibold uppercase tracking-[0.14em] text-white/78 sm:text-[11px] sm:tracking-[0.16em]">
-                        {categoryCounts[c.name] ?? 0} {categoryCounts[c.name] === 1 ? "activity" : "activities"}
-                      </div>
-                      <div className="mt-1 font-display text-[1.1rem] leading-none text-white sm:text-xl">{c.name}</div>
-                    </div>
-                  </div>
-                </Link>
-                  );
-                })()}
-              </motion.div>
-            ))}
-          </div>
-        </section>
-
-        <section className="container py-10">
-          <div className="home-map-teaser grid gap-6 lg:grid-cols-12 lg:items-center">
-            <div className="home-map-copy lg:col-span-7">
-              <div className="home-section-kicker">Explore by map</div>
-              <h2 className="mt-2 font-display text-3xl tracking-wide text-slate-950 sm:text-4xl">
-                Explore Lebanon by region
-              </h2>
-              <p className="mt-3 max-w-xl text-sm leading-6 text-slate-600 sm:text-base">
-                From Batroun's coast to the Cedars, find adventures by area.
-              </p>
-              <Link href="/map" className="home-search-button mt-5 inline-flex">
-                Open Interactive Map <ArrowRight className="h-4 w-4" />
+                All categories <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
-            <Link href="/map" className="home-mini-map group lg:col-span-5" aria-label="Open interactive map">
-              <div className="home-region-photo-card" aria-hidden="true">
-                <div className="home-region-photo-badge">7 regions</div>
-                <div className="home-region-photo-content">
-                  <div>
-                    <div className="home-region-photo-title">Explore by region</div>
-                    <div className="home-region-photo-subtitle">Coast, mountains, valleys</div>
-                  </div>
-                  <div className="home-region-photo-cta">
-                    Open full map <ArrowRight className="h-3.5 w-3.5" />
-                  </div>
-                </div>
-              </div>
-            </Link>
+            <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 sm:gap-3 lg:grid-cols-5">
+              {categories.map((c, i) => (
+                <motion.div
+                  key={c.name}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.04 }}
+                >
+                  {(() => {
+                    const Icon = categoryIcons[c.icon as keyof typeof categoryIcons] ?? Mountain;
+                    return (
+                  <Link
+                    href={`/activities?category=${encodeURIComponent(c.name)}`}
+                    className="home-feature-card group min-h-[140px] rounded-2xl p-3.5 sm:min-h-[165px] sm:rounded-3xl sm:p-4"
+                    style={{
+                      "--feature-card-image": `url(${c.image})`,
+                      "--feature-card-position": c.position ?? "center",
+                    } as CSSProperties}
+                  >
+                    <div className="relative z-10 flex h-full flex-col justify-between">
+                      <Icon className="h-4 w-4 text-white sm:h-5 sm:w-5" strokeWidth={2.4} />
+                      <div>
+                        <div className="text-[10px] font-semibold uppercase tracking-[0.14em] text-white/78 sm:text-[11px] sm:tracking-[0.16em]">
+                          {categoryCounts[c.name] ?? 0} {categoryCounts[c.name] === 1 ? "activity" : "activities"}
+                        </div>
+                        <div className="mt-1 font-display text-[1.1rem] leading-none text-white sm:text-xl">{c.name}</div>
+                      </div>
+                    </div>
+                  </Link>
+                    );
+                  })()}
+                </motion.div>
+              ))}
+            </div>
           </div>
         </section>
 
         <SectionRow
-          kicker="Coast is calling"
-          title="TRENDING NOW"
+          kicker="Picked for you"
+          title="RECOMMENDED"
           href="/activities?category=Water"
           activities={activities.filter((a) => a.category === "Water").slice(0, 8)}
-        />
-
-        <SectionRow
-          kicker="Off the radar"
-          title="HIDDEN GEMS"
-          activities={activities.filter((a) => ["Akoura", "Tannourine", "Ehden", "Jezzine", "Anfeh", "Baskinta", "Nahr Ibrahim"].includes(a.city)).slice(0, 8)}
-        />
-
-        <SectionRow
-          kicker="Light on the wallet"
-          title="BUDGET-FRIENDLY"
-          href="/activities?budget=under20"
-          activities={activities.filter((a) => a.price <= 25).slice(0, 8)}
         />
 
         <section className="container py-16">
@@ -298,6 +263,37 @@ Ride. Fly. Dive. Explore. All in one place.
         {recents.length > 0 && (
           <SectionRow kicker="Where you left off" title="RECENTLY VIEWED" activities={recents} />
         )}
+
+        <section className="container py-10">
+          <div className="home-map-teaser grid gap-6 lg:grid-cols-12 lg:items-center">
+            <div className="home-map-copy lg:col-span-7">
+              <div className="home-section-kicker">Explore by map</div>
+              <h2 className="mt-2 font-display text-3xl tracking-wide text-slate-950 sm:text-4xl">
+                Explore Lebanon by region
+              </h2>
+              <p className="mt-3 max-w-xl text-sm leading-6 text-slate-600 sm:text-base">
+                From Batroun's coast to the Cedars, find adventures by area.
+              </p>
+              <Link href="/map" className="home-search-button mt-5 inline-flex">
+                Open Interactive Map <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
+            <Link href="/map" className="home-mini-map group lg:col-span-5" aria-label="Open interactive map">
+              <div className="home-region-photo-card" aria-hidden="true">
+                <div className="home-region-photo-badge">7 regions</div>
+                <div className="home-region-photo-content">
+                  <div>
+                    <div className="home-region-photo-title">Explore by region</div>
+                    <div className="home-region-photo-subtitle">Coast, mountains, valleys</div>
+                  </div>
+                  <div className="home-region-photo-cta">
+                    Open full map <ArrowRight className="h-3.5 w-3.5" />
+                  </div>
+                </div>
+              </div>
+            </Link>
+          </div>
+        </section>
 
         <section className="container py-16">
           <div className="grid gap-8 lg:grid-cols-12">

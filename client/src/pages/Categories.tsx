@@ -2,12 +2,14 @@ import { Link } from "wouter";
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import Layout from "@/components/site/Layout";
-import { activities, categories } from "@/data/activities";
+import { activities, categories, hiddenGemCities } from "@/data/activities";
 import { cn } from "@/lib/utils";
 
 export default function CategoriesPage() {
   const counts = categories.reduce((acc, c) => {
-    acc[c.name] = activities.filter((a) => a.category === c.name).length;
+    acc[c.name] = c.name === "Hidden Gems"
+      ? activities.filter((a) => hiddenGemCities.includes(a.city)).length
+      : activities.filter((a) => a.category === c.name).length;
     return acc;
   }, {} as Record<string, number>);
 

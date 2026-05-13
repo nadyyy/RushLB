@@ -21,7 +21,8 @@ export type CategoryName =
   | "Nature and Animals"
   | "Groups"
   | "Shooting"
-  | "Adrenaline";
+  | "Adrenaline"
+  | "Hidden Gems";
 
 export type Review = {
   id: string;
@@ -372,11 +373,14 @@ export const activities: Activity[] = seeds.map((s, idx) => {
   };
 });
 
+export const hiddenGemCities = ["Akoura", "Tannourine", "Ehden", "Jezzine", "Anfeh", "Baskinta", "Nahr Ibrahim"];
+
 export const categories = [
   { name: "Water", icon: "Waves", color: "from-cyan-400 to-blue-700", image: waterCategoryImage, position: "center center" },
   { name: "Sky", icon: "Plane", color: "from-sky-400 to-indigo-700", image: skyCategoryImage, position: "center 68%" },
   { name: "Snow", icon: "Snowflake", color: "from-blue-300 to-indigo-700", image: snowCategoryImage, position: "center center" },
   { name: "Nature and Animals", icon: "Trees", color: "from-emerald-500 to-blue-800", image: natureAndAnimalsCategoryImage, position: "center center" },
+  { name: "Hidden Gems", icon: "Leaf", color: "from-emerald-500 to-cyan-800", image: natureAndAnimalsCategoryImage, position: "center center" },
   { name: "Groups", icon: "Users", color: "from-blue-400 to-indigo-700", image: groupsCategoryImage, position: "center center" },
   { name: "Shooting", icon: "Zap", color: "from-amber-500 to-blue-900", image: shootingCategoryImage, position: "center center" },
   { name: "Adrenaline", icon: "Zap", color: "from-blue-500 to-indigo-700", image: adrenalineCategoryImage, position: "center 68%" },
