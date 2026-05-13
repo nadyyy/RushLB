@@ -56,13 +56,15 @@ export default function ActivitiesPage() {
           <div className="container activities-hero-content py-10 lg:py-14">
             <div className="home-section-kicker mb-2">All adventures</div>
             <h1 className="font-display text-4xl tracking-wide text-slate-950 sm:text-5xl lg:text-6xl">
-              EXPLORE LEBANON
+              <span className="sm:hidden">FIND YOUR RUSH</span>
+              <span className="hidden sm:inline">EXPLORE LEBANON</span>
             </h1>
-            <p className="mt-3 max-w-xl text-slate-700">
-              Filter by city, category, budget and difficulty to find the next thing to do.
+            <p className="mt-1 max-w-xl text-sm text-slate-700 sm:mt-3 sm:text-lg">
+              <span className="sm:hidden">Pick a vibe. Go.</span>
+              <span className="hidden sm:inline">Filter by city, category, budget and difficulty to find the next thing to do.</span>
             </p>
 
-            <div className="mt-6 flex max-w-4xl flex-col gap-3 sm:flex-row">
+            <div className="mt-3 flex max-w-4xl flex-col gap-2 sm:mt-6 sm:gap-3 sm:flex-row">
               <div className="home-discovery-search flex-1">
                 <div className="flex min-w-0 flex-1 items-center gap-3 px-4">
                   <Search className="h-5 w-5 shrink-0 text-sky-700" />
@@ -70,7 +72,7 @@ export default function ActivitiesPage() {
                     value={state.query}
                     onChange={(e) => setState({ ...state, query: e.target.value })}
                     placeholder="Search activities, cities, or experiences..."
-                    className="min-w-0 flex-1 bg-transparent py-4 text-sm text-slate-900 outline-none placeholder:text-slate-500 sm:text-base"
+                    className="min-w-0 flex-1 bg-transparent py-2.5 text-sm text-slate-900 outline-none placeholder:text-slate-500 sm:py-4 sm:text-base"
                   />
                   {state.query && (
                     <button
@@ -85,7 +87,7 @@ export default function ActivitiesPage() {
               </div>
               <button
                 onClick={() => setFilterPanelOpen((open) => !open)}
-                className="filters-solid-button inline-flex min-h-14 h-auto items-center justify-center gap-2 rounded-full px-5 text-sm font-extrabold text-white transition"
+                className="filters-solid-button inline-flex min-h-10 h-auto items-center justify-center gap-2 rounded-full px-4 text-sm font-extrabold text-white transition sm:min-h-14 sm:px-5"
                 style={{
                   background: "#0f5f79",
                   backgroundImage: "none",

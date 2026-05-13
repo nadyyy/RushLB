@@ -1184,16 +1184,29 @@
 
   @media (max-width: 640px) {
     .activities-hero-content {
-      padding-bottom: 4.75rem;
+      padding-top: 0.55rem;
+      padding-bottom: 1.1rem;
     }
     .activities-results-section {
       margin-top: 0;
-      padding-top: 0.45rem;
+      padding-top: 0.05rem;
       padding-bottom: 2rem;
     }
     .activities-results-shell {
-      padding: 1rem;
+      padding: 0.9rem;
       border-radius: 1.35rem;
+    }
+    .activities-page .home-section-kicker {
+      margin-bottom: 0.25rem;
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+    }
+    .activities-page h1 {
+      font-size: 2.2rem;
+      line-height: 0.9;
+    }
+    .activities-page .home-discovery-search {
+      padding: 0.16rem;
     }
     .home-hero-video-overlay-primary {
       background:
